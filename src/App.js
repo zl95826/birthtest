@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from 'react';
+import Radio from './components/Radio';
+import Table from './components/Table';
 
-function App() {
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      parameterState:"name"
+    }
+    this.sortByParameter=this.sortByParameter.bind(this);
+  }
+  sortByParameter(Parameter) {
+    if(Parameter==='name') {this.setState({parameterState:"name"})}
+    else {this.setState({parameterState:"age"})}
+  }
+  render() {
+    console.log(this.state.parameterState);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <center><h1>Birthday Record</h1></center>
+      <Radio click={this.sortByParameter} sortedBy={this.state.parameterState}/>
+      <Table sortedBy={this.state.parameterState}/>
     </div>
   );
+  }
 }
 
 export default App;
